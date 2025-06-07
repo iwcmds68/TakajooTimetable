@@ -53,11 +53,11 @@ export const App = () => {
       <div id="up-trains"><TrainTimetableDisplay direction="上り" fileName="UpTrains" /></div>
       <h2>日豊本線　下り（臼杵・佐伯方面）</h2>
       <div id="down-trains"><TrainTimetableDisplay direction="下り" fileName="DownTrains" /></div>
-      <li>
-        <ol><em>平日の時刻を表示しています．</em></ol>
-        <ol>本サービスはJR九州およびその関連会社と全く関係ありません．</ol>
-        <ol>連絡先: RockPaddy <a href="https://docs.google.com/forms/d/e/1FAIpQLSdCSEvJwwkPuxDm12P8cGlS0Q8-p1VABZ802VRUcrsXCLCLEA/viewform?usp=dialog">連絡フォーム</a></ol>
-      </li>
+      <ul>
+        <li><em>平日の時刻を表示しています．</em></li>
+        <li>本サービスはJR九州およびその関連会社と全く関係ありません．</li>
+        <li>連絡先: RockPaddy，<a href="https://docs.google.com/forms/d/e/1FAIpQLSdCSEvJwwkPuxDm12P8cGlS0Q8-p1VABZ802VRUcrsXCLCLEA/viewform?usp=dialog">連絡フォーム．</a></li>
+      </ul>
     </div>
   );
 }
