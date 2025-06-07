@@ -36,3 +36,95 @@
     transform: rotate(360deg);
   }
 }
+
+/* ... 既存のCSS ... */
+
+main {
+  text-align: center;
+}
+
+/* 通過列車用の全体の行のスタイル */
+.train-row-pass td.destination-pass-full-row {
+    font-weight: bold;
+    font-size: 1em; /* 大きく */
+    color: #FF0000; /* 赤色など */
+    /* colspan で結合されたセルの中央揃え */
+    vertical-align: middle;
+}
+
+/* 備考表示用の全体の行のスタイル */
+.remark-full-row {
+    background-color: #000; /* 備考表示時の背景色 */
+    color: #FFFF00; /* 備考の文字色（例: 黄色） */
+    font-size: 1em; /* 備考を大きく表示 */
+    text-align: left; /* スライド表示のため左寄せ */
+    vertical-align: middle;
+    overflow: hidden; /* スライドするテキストがはみ出さないように */
+    white-space: nowrap; /* テキストを折り返さない */
+    width: 90%;
+}
+
+.timetable-table {
+  width: min(100%, 400px);
+  background-color: #000;
+  table-layout: fixed;
+}
+
+.id-cell {
+  background-color: #5f5;
+  color: #000;
+  border-radius: 5px;
+  font-size: small;
+}
+
+.type-cell {
+  color: #5f5;
+}
+
+.time-cell {
+  color: #5f5;
+}
+
+.destination-cell {
+  color: #f99;
+}
+
+.carriages-cell {
+  color: #5f5;
+}
+
+.platform-cell {
+  color: #f44;
+}
+
+.unit {
+  font-size: 60%;
+}
+
+.remark-text {
+    display: inline-block; /* アニメーションのために必須 */
+    /* overflow, white-space は親の.remark-full-rowに設定 */
+}
+
+/* スライドアニメーションのキーフレーム */
+@keyframes scroll-left {
+    0% { transform: translateX(90%); } /* 右端から開始 */
+    100% { transform: translateX(-100%); } /* 左端まで移動 */
+}
+
+/* スライドを適用するクラス */
+.remark-slide-animation {
+  width: min(400px, 100%);
+    animation: scroll-left var(--scroll-duration, 10s) linear forwards; /* 変数でアニメーション時間を設定 */
+    /* --scroll-duration は JavaScript で設定 */
+}
+
+/* 各セルの幅の調整 (必要であれば) */
+.timetable-table th:nth-child(1), .timetable-table td:nth-child(1) { width: 8%; } /* ID */
+.timetable-table th:nth-child(2), .timetable-table td:nth-child(2) { width: 10%; } /* 時刻 */
+.timetable-table th:nth-child(3), .timetable-table td:nth-child(3) { width: 10%; } /* 種別 */
+.timetable-table th:nth-child(4), .timetable-table td:nth-child(4) { width: 25%; } /* 行き先 */
+.timetable-table th:nth-child(5), .timetable-table td:nth-child(5) { width: 10%; } /* 両数 */
+.timetable-table th:nth-child(6), .timetable-table td:nth-child(6) { width: 10%; } /* のりば */
+.timetable-table th:nth-child(7), .timetable-table td:nth-child(7) { width: 25%; } /* 備考 (通常モード時) */
+/* colSpan="6" の場合は、上記のうち6列分が統合される */
