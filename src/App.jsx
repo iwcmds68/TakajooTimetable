@@ -54,6 +54,7 @@ export const App = () => {
       <div id="up-trains"><TrainTimetableDisplay direction="上り" fileName="UpTrains" /></div>
       <h2>日豊本線　下り（臼杵・佐伯方面）</h2>
       <div id="down-trains"><TrainTimetableDisplay direction="下り" fileName="DownTrains" /></div>
+      <p><em>平日の時刻を表示しています。</em></p>
     </div>
   );
 }
