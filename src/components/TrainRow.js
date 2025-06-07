@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { getTrainType } from '../hooks/useTrainTimeTable';
 
-const TrainRow = ({trainData, displayInterval = 6000}) => {
+const TrainRow = ({trainData, displayInterval = 10000}) => {
     const { ID, Time, Type, Destination, Carriages, Platform, Information } = trainData;
     const [isRemarkMode, setIsRemarkMode] = useState(false); // 備考を表示するかどうかの状態
     const remarkTextRef = useRef(null);
