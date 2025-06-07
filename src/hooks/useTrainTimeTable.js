@@ -42,7 +42,6 @@ export const useTrainTimeTable = fileName => {
           skipEmptyLines: true,
           transformHeader: (header) => header.trim(),
           complete: (results) => {
-            console.log("パースされたCSVデータ (results.data):", results.data);
             setTimetable(results.data);
           },
           error: (error) => {
