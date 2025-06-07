@@ -2,10 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import { getTrainType } from '../hooks/useTrainTimeTable';
 
 const TrainRow = ({trainData, displayInterval = 6000}) => {
-    const { ID, 時刻, 種別, 行き先, 両数, のりば, 備考 } = trainData;
+    const { ID, Time, Type, Destination, Carriages, Platform, Information } = trainData;
     const [isRemarkMode, setIsRemarkMode] = useState(false); // 備考を表示するかどうかの状態
     const remarkTextRef = useRef(null);
-    const displayType = getTrainType(種別); // 種別コードを文字列に変換
+    const displayType = getTrainType(Type); // 種別コードを文字列に変換
 
     // 備考表示の切り替えタイマー
     useEffect(() => {
@@ -13,7 +13,7 @@ const TrainRow = ({trainData, displayInterval = 6000}) => {
         let animationEndListenerAdded = false;
 
         // 備考がない、または通過列車の場合は、常に通常モードで何もしない
-        if (種別 === '20' || !備考) {
+        if (Type === '20' || !Information) {
         setIsRemarkMode(false);
         return;
         }
@@ -35,7 +35,7 @@ const TrainRow = ({trainData, displayInterval = 6000}) => {
         };
 
         // --- isRemarkModeがtrueになった時の処理（ここが重要） ---
-        if (isRemarkMode && 備考 && 種別 !== '20') { // 備考モードに入った場合
+        if (isRemarkMode && Information && Type !== '20') { // 備考モードに入った場合
         // DOMの更新を待つために、わずかなsetTimeoutを挟むのが最も確実
         // これにより、ReactがDOMをレンダリングし、refが設定されるのを確実に待つ
         const domReadyTimer = setTimeout(() => {
@@ -87,36 +87,36 @@ const TrainRow = ({trainData, displayInterval = 6000}) => {
             remarkTextRef.current.style.removeProperty('--scroll-duration');
         }
         };
-    }, [ID, 備考, 種別, displayInterval, isRemarkMode]); // isRemarkModeも依存配列に含める
+    }, [ID, Information, Type, displayInterval, isRemarkMode]); // isRemarkModeも依存配列に含める
 
-    if (種別 === '20') {
+    if (Type === '20') {
         return (
             <tr className="train-row train-row-pass">
                 <td className="id-cell">{ID}</td>
-                <td className="time-cell">{時刻}</td>
+                <td className="time-cell">{Time}</td>
                 <td className="type-cell"></td>
                 <td colSpan="2" className="destination-pass-full-row">通　過</td>
-                <td className="platform-cell">{のりば}<span className="unit">のりば</span></td>
+                <td className="platform-cell">{Platform}<span className="unit">のりば</span></td>
             </tr>
         );
     }
 
     return ( 
         <tr className="train-row">
-            {種別 !== '20' && isRemarkMode && 備考 !== '' ? (
+            {Type !== '20' && isRemarkMode && Information !== '' ? (
                 <td colSpan="6" className="remark-full-row">
                     <span ref={remarkTextRef} className="remark-text">
-                        {備考}
+                        {Information}
                     </span>
                 </td>
             ) : (
                 <>
                     <td className="id-cell">{ID}</td>
-                    <td className="time-cell">{時刻}</td>
+                    <td className="time-cell">{Time}</td>
                     <td className="type-cell">{displayType}</td>
-                    <td className="destination-cell">{行き先}</td>
-                    <td className="carriages-cell">{両数 || '?'}<span className="unit">両</span></td>
-                    <td className="platform-cell">{のりば}<span className="unit">のりば</span></td>
+                    <td className="destination-cell">{Destination}</td>
+                    <td className="carriages-cell">{Carriages || '?'}<span className="unit">両</span></td>
+                    <td className="platform-cell">{Platform}<span className="unit">のりば</span></td>
                 </>
             )}
         </tr>

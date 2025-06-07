@@ -21,7 +21,17 @@ export const useTrainTimeTable = fileName => {
   useEffect(() => {
     const fetchCsvData = async () => {
       try {
-        const response = await fetch('/' + fileName + '.csv');
+         // process.env.PUBLIC_URL を使って、ベースパスを動的に決定
+        // PUBLIC_URLは、ローカル環境では通常 '/' (または空文字列)、
+        // デプロイ先では '/TakajooTimetable' となる
+        const basePath = process.env.PUBLIC_URL; // これで十分なはずです
+
+        // 正しいパスの構築
+        // 例: ローカルでは '/your_file_name.csv'
+        // 例: デプロイ先では '/TakajooTimetable/your_file_name.csv'
+        const urlToFetch = `${basePath}/${fileName}.csv`; // fileName には 'your_file_name' のような文字列を渡す
+        console.log("フェッチするURL:", urlToFetch); // デバッグ用にログ出力
+        const response = await fetch(urlToFetch);
         if (!response.ok) {
           throw new Error(`HTTPエラー．ステータス: ${response.status}`);
         }
@@ -33,6 +43,7 @@ export const useTrainTimeTable = fileName => {
           skipEmptyLines: true,
           transformHeader: (header) => header.trim(),
           complete: (results) => {
+            console.log("パースされたCSVデータ (results.data):", results.data);
             setTimetable(results.data);
           },
           error: (error) => {
@@ -57,17 +68,19 @@ export const useTrainTimeTable = fileName => {
       const upcomingTrains = []; // これから来る列車のリスト
       let foundFirstUpcoming = false;
 
+      console.log("時刻表" + timetable)
+
       // 時刻順にソートしなおす
       // 時刻を Date オブジェクトに変換して比較
       const sortedData = [...timetable].sort((a, b) => {
-        const timeA = new Date(today.getTime()).setHours(...a.時刻.split(':').map(Number), 0, 0);
-        const timeB = new Date(today.getTime()).setHours(...b.時刻.split(':').map(Number), 0, 0);
+        const timeA = new Date(today.getTime()).setHours(...a.Time.split(':').map(Number), 0, 0);
+        const timeB = new Date(today.getTime()).setHours(...b.Time.split(':').map(Number), 0, 0);
         return timeA - timeB;
       });
 
       for (let i = 0; i < sortedData.length; i++) {
         const train = sortedData[i];
-        const trainTime = new Date(today.getTime()).setHours(...train.時刻.split(':').map(Number), 0, 0);
+        const trainTime = new Date(today.getTime()).setHours(...train.Time.split(':').map(Number), 0, 0);
 
         // 現在時刻を過ぎた列車はスキップする．ただし，最初のこれから来る列車を見つけるまではスキップしつづける
         if (trainTime < now.getTime() && !foundFirstUpcoming) {
