@@ -30,7 +30,6 @@ export const useTrainTimeTable = fileName => {
         // 例: ローカルでは '/your_file_name.csv'
         // 例: デプロイ先では '/TakajooTimetable/your_file_name.csv'
         const urlToFetch = `${basePath}/${fileName}.csv`; // fileName には 'your_file_name' のような文字列を渡す
-        console.log("フェッチするURL:", urlToFetch); // デバッグ用にログ出力
         const response = await fetch(urlToFetch);
         if (!response.ok) {
           throw new Error(`HTTPエラー．ステータス: ${response.status}`);
@@ -67,9 +66,6 @@ export const useTrainTimeTable = fileName => {
 
       const upcomingTrains = []; // これから来る列車のリスト
       let foundFirstUpcoming = false;
-
-      console.log("時刻表" + timetable)
-
       // 時刻順にソートしなおす
       // 時刻を Date オブジェクトに変換して比較
       const sortedData = [...timetable].sort((a, b) => {
