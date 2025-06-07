@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/TakajooTimetable/static/css/main.60fce246.css",
-    "main.js": "/TakajooTimetable/static/js/main.57214597.js",
+    "main.js": "/TakajooTimetable/static/js/main.aba3cf7a.js",
     "static/js/453.fe4dc0aa.chunk.js": "/TakajooTimetable/static/js/453.fe4dc0aa.chunk.js",
     "static/media/logo.svg": "/TakajooTimetable/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/TakajooTimetable/index.html",
     "main.60fce246.css.map": "/TakajooTimetable/static/css/main.60fce246.css.map",
-    "main.57214597.js.map": "/TakajooTimetable/static/js/main.57214597.js.map",
+    "main.aba3cf7a.js.map": "/TakajooTimetable/static/js/main.aba3cf7a.js.map",
     "453.fe4dc0aa.chunk.js.map": "/TakajooTimetable/static/js/453.fe4dc0aa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.60fce246.css",
-    "static/js/main.57214597.js"
+    "static/js/main.aba3cf7a.js"
   ]
 }
