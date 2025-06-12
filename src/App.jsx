@@ -55,7 +55,7 @@ export const App = () => {
       <div id="down-trains"><TrainTimetableDisplay direction="下り" fileName="DownTrains" /></div>
       <ul>
         <li><em>平日の時刻を表示しています．</em></li>
-        <li><em>ダイヤ乱れなどのリアルタイムの運行状況には対応していません．</em></li>
+        <li><em>ダイヤ乱れなどのリアルタイムの運行状況には対応していません</em>．現在の運行状況は<a href="https://jrkyushu.co.jp/trains/info/oita.html">JR九州の公式運行状況ページ</a>からご確認ください．</li>
         <li>本サービスはJR九州およびその関連会社と全く関係ありません．</li>
         <li>連絡先: RockPaddy，<a href="https://docs.google.com/forms/d/e/1FAIpQLSdCSEvJwwkPuxDm12P8cGlS0Q8-p1VABZ802VRUcrsXCLCLEA/viewform?usp=dialog">連絡フォーム</a>．</li>
       </ul>
